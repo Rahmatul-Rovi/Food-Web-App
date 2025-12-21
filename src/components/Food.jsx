@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { data } from '../data/data.js';
+import { Link } from 'react-router-dom'; // <--- 1. Link import kora hoyeche
 
 const Food = () => {
-  //   console.log(data);
   const [foods, setFoods] = useState(data);
 
-  //   Filter Type burgers/pizza/etc
+  // Filter Type burgers/pizza/etc
   const filterType = (category) => {
     setFoods(
       data.filter((item) => {
@@ -14,7 +14,7 @@ const Food = () => {
     );
   };
 
-  //   Filter by price
+  // Filter by price
   const filterPrice = (price) => {
     setFoods(
       data.filter((item) => {
@@ -31,10 +31,10 @@ const Food = () => {
 
       {/* Filter Row */}
       <div className='flex flex-col lg:flex-row justify-between'>
-        {/* Fliter Type */}
+        {/* Filter Type */}
         <div>
           <p className='font-bold text-gray-700'>Filter Type</p>
-          <div className='flex justfiy-between flex-wrap'>
+          <div className='flex justify-between flex-wrap'>
             <button
               onClick={() => setFoods(data)}
               className='m-1 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white'
@@ -72,30 +72,10 @@ const Food = () => {
         <div>
           <p className='font-bold text-gray-700'>Filter Price</p>
           <div className='flex justify-between max-w-[390px] w-full'>
-            <button
-              onClick={() => filterPrice('$')}
-              className='m-1 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white'
-            >
-              $
-            </button>
-            <button
-              onClick={() => filterPrice('$$')}
-              className='m-1 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white'
-            >
-              $$
-            </button>
-            <button
-              onClick={() => filterPrice('$$$')}
-              className='m-1 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white'
-            >
-              $$$
-            </button>
-            <button
-              onClick={() => filterPrice('$$$$')}
-              className='m-1 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white'
-            >
-              $$$$
-            </button>
+            <button onClick={() => filterPrice('$')} className='m-1 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white'>$</button>
+            <button onClick={() => filterPrice('$$')} className='m-1 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white'>$$</button>
+            <button onClick={() => filterPrice('$$$')} className='m-1 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white'>$$$</button>
+            <button onClick={() => filterPrice('$$$$')} className='m-1 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white'>$$$$</button>
           </div>
         </div>
       </div>
@@ -107,11 +87,15 @@ const Food = () => {
             key={index}
             className='border shadow-lg rounded-lg hover:scale-105 duration-300'
           >
-            <img
-              src={item.image}
-              alt={item.name}
-              className='w-full h-[200px] object-cover rounded-t-lg'
-            />
+            {/* 2. Link diye Image-ke wrap kora hoyeche */}
+            <Link to={`/food/${item.id}`}> 
+              <img
+                src={item.image}
+                alt={item.name}
+                className='w-full h-[200px] object-cover rounded-t-lg cursor-pointer'
+              />
+            </Link>
+            
             <div className='flex justify-between px-2 py-4'>
               <p className='font-bold'>{item.name}</p>
               <p>
